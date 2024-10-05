@@ -47,7 +47,7 @@ export default function Navbar() {
           <LibraryMusicIcon sx={{ fontSize: 40 }} />
           <span className="text-2xl font-black">Planice</span>
         </div>
-        <p>My Documents</p>
+        <p className="text-lg font-semibold text-slate-400">My Documents</p>
       </div>
       <div className="flex items-center gap-6">
         <NotificationsNoneOutlinedIcon sx={{ fontSize: 32 }} />

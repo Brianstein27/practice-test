@@ -3,57 +3,43 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import mockState from "../../MockState";
 
-function Folder() {
+function Folder({ title }) {
   return (
     <div className="flex items-center gap-2">
       <FolderIcon />
-      <span>Folder</span>
+      <span>{title}</span>
+    </div>
+  );
+}
+
+function FolderSection({ section, folders }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <LibraryBooksIcon />
+        <span className="font-semibold">{section}</span>
+      </div>
+      <div className="flex flex-col items-start gap-2 pl-4">
+        <div className="flex gap-2 text-slate-500">
+          <CreateNewFolderIcon />
+          <span className="items-center italic">New Folder</span>
+        </div>
+        {folders.map((folder) => (
+          <Folder title={folder} />
+        ))}
+      </div>
     </div>
   );
 }
 
 function FolderTree() {
+  const folders = mockState.folders;
   return (
     <div className="flex flex-col gap-5 overflow-hidden">
-      <div id="plans-section" className="flex flex-col gap-3">
-        <div id="plans-heading" className="flex items-center gap-2">
-          <LibraryBooksIcon />
-          <span className="font-semibold">Plans</span>
-        </div>
-        <div
-          id="plans-folders"
-          className="flex flex-col items-start gap-2 pl-4"
-        >
-          <div id="new-folder" className="flex gap-2 text-slate-600">
-            <CreateNewFolderIcon />
-            <span className="items-center italic">New Folder</span>
-          </div>
-          <Folder />
-          <Folder />
-          <Folder />
-          <Folder />
-        </div>
-      </div>
-      <div id="exercises-section" className="flex flex-col gap-3">
-        <div id="exercises-heading" className="flex items-center gap-2">
-          <LibraryMusicIcon />
-          <span className="font-semibold">Exercises</span>
-        </div>
-        <div
-          id="exercises-folders"
-          className="flex flex-col items-start gap-2 pl-4"
-        >
-          <div id="new-folder" className="flex gap-2 text-slate-600">
-            <CreateNewFolderIcon />
-            <span className="items-center italic">New Folder</span>
-          </div>
-          <Folder />
-          <Folder />
-          <Folder />
-          <Folder />
-        </div>
-      </div>
+      <FolderSection folders={folders.plans} section="Plans" />
+      <FolderSection folders={folders.exercises} section="Exercises" />
       <div className="flex items-center gap-2">
         <DeleteIcon />
         <span className="font-semibold">Trash</span>
